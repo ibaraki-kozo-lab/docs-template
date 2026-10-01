@@ -1,6 +1,6 @@
 # 書き方の見本
 
-このサイトで使える書き方の見本である．それぞれ，書き方（Markdown）のあとに，表示される形を示す．Markdownそのものの書き方は，研究室ハンドブックの「Markdown」にある．要らなくなったら，このページを消し，`mkdocs.yml` の `nav` からも外す．
+このサイトで使える書き方の見本である．それぞれ，書き方（Markdown）のあとに，表示される形を示す．Markdownそのものの書き方は，研究室ハンドブックの「[Markdown](https://lab-handbook-ein.pages.dev/dev/markdown/)」にある．要らなくなったら，このページを消し，`mkdocs.yml` の `nav` からも外す．
 
 ## ページへのリンク {#links}
 

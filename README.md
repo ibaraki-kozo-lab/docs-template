@@ -4,7 +4,7 @@
 
 ## 準備
 
-uv，Make，Gitを使う．入れ方は，研究室ハンドブックの「環境構築（uv）」「Make」「はじめてのGit・GitHub」にある．このテンプレートは，ハンドブックの「Markdown」と「実践：ドキュメントサイト」まで読んだ前提で書いてある．
+uv，Make，Gitを使う．入れ方は，[研究室ハンドブック][hb]の「[環境構築（uv）][hb-uv-install]」「[Make][hb-make-install]」「[はじめてのGit・GitHub][hb-git]」にある．このテンプレートは，ハンドブックの「[Markdown][hb-markdown]」と「[実践：ドキュメントサイト][hb-docs-site]」まで読んだ前提で書いてある．ハンドブックは研究室の人だけが読めるサイトで，開くときは，管理者が登録した大学のメールアドレスを使う．
 
 VS Codeでフォルダを開くと，おすすめの拡張機能（YAML）を入れるか尋ねられる．入れると，`mkdocs.yml` を書くときに，書ける項目の候補と誤りが示される．
 
@@ -111,7 +111,7 @@ GitHub Pagesのサイトは，リポジトリが非公開でも，インター�
 4. リポジトリの変数 `DOCS_PUBLISH` を `cloudflare` にして作る
 5. `mkdocs.yml` の `site_url` に公開先のアドレス（`https://サブドメイン.pages.dev/`）を書き，`main` にpushする
 
-Cloudflare Pagesを編集できるトークンは，アカウントにあるすべてのPagesのプロジェクトを作成・編集・削除でき，プロジェクトごとには絞れない．また，リポジトリにWriteを持つ人は，ワークフローを書き換えればシークレットを使える．ほかのサイトを任せてよい人だけが書くリポジトリに設定する（ハンドブックの「GitHub Actions（CI）」の「コラム：シークレットは誰が使えるか」）．
+Cloudflare Pagesを編集できるトークンは，アカウントにあるすべてのPagesのプロジェクトを作成・編集・削除でき，プロジェクトごとには絞れない．また，リポジトリにWriteを持つ人は，ワークフローを書き換えればシークレットを使える．ほかのサイトを任せてよい人だけが書くリポジトリに設定する（ハンドブックの「[GitHub Actions（CI）][hb-actions]」の「[コラム：シークレットは誰が使えるか][hb-actions-secrets]」）．
 
 ## 困ったとき
 
@@ -125,10 +125,22 @@ Cloudflare Pagesを編集できるトークンは，アカウントにあるす�
 
 ## 変更の流れ
 
-変更はブランチで作り，PRを出す．PRではCIが `make` を実行する．✗ が付いたら，**Details** からログを開き，`WARNING` の行を読んで直す（ハンドブックの「ブランチとPR」と「実践：ドキュメントサイト」）．PRの本文は，ひな形のChecklistを埋める．このリポジトリの決まりは `AGENTS.md` にある．
+変更はブランチで作り，PRを出す．PRではCIが `make` を実行する．✗ が付いたら，**Details** からログを開き，`WARNING` の行を読んで直す（ハンドブックの「[ブランチとPR][hb-branches]」と「[実践：ドキュメントサイト][hb-docs-site]」）．PRの本文は，ひな形のChecklistを埋める．このリポジトリの決まりは `AGENTS.md` にある．
 
 ## 道具について
 
-Material for MkDocsは，新しい機能が足されない保守だけの状態になっている．同じ開発元の後継のZensicalは，`mkdocs.yml` をそのまま読める．研究室ハンドブックと同じ時期にZensicalへ移る予定で，そのときは，このテンプレート（`ibaraki-kozo-lab/docs-template`）に移り方を書く．テンプレートから作ったリポジトリには，テンプレートの変更が自動では届かないので，そのときに見に来る．
+Material for MkDocsは，新しい機能が足されない保守だけの状態になっている．同じ開発元の後継のZensicalは，`mkdocs.yml` をそのまま読める．[研究室ハンドブック][hb]と同じ時期にZensicalへ移る予定で，そのときは，このテンプレート（`ibaraki-kozo-lab/docs-template`）に移り方を書く．テンプレートから作ったリポジトリには，テンプレートの変更が自動では届かないので，そのときに見に来る．
 
 Material for MkDocsは，MkDocsの次のバージョン（2.0）についての知らせを，組み立てるたびに枠で囲んで表示する．このテンプレートは今のMkDocs（1.x）を使い続けるので関係しない．`make` と `make serve` では，`Makefile` の `NO_MKDOCS_2_WARNING` で表示しないようにしてある．
+
+<!-- 研究室ハンドブックへのリンク．ハンドブックのページの場所が変わったら，ここを直す -->
+
+[hb]: https://lab-handbook-ein.pages.dev/
+[hb-uv-install]: https://lab-handbook-ein.pages.dev/python/uv/#install
+[hb-make-install]: https://lab-handbook-ein.pages.dev/dev/make/#install
+[hb-git]: https://lab-handbook-ein.pages.dev/dev/git/
+[hb-markdown]: https://lab-handbook-ein.pages.dev/dev/markdown/
+[hb-docs-site]: https://lab-handbook-ein.pages.dev/practice/docs-site/
+[hb-actions]: https://lab-handbook-ein.pages.dev/dev/actions/
+[hb-actions-secrets]: https://lab-handbook-ein.pages.dev/dev/actions/#who-can-use-secrets
+[hb-branches]: https://lab-handbook-ein.pages.dev/dev/branches/
