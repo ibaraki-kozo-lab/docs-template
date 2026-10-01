@@ -1,0 +1,14 @@
+# make（mkdocs build）が作るサイト
+site/
+
+# uv が作る仮想環境
+.venv
+
+# Python が作るもの
+__pycache__/
+
+# 秘密の値を書いたファイル（コミットしない）
+.env
+
+# macOS が作るもの
+.DS_Store

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 180" width="420" height="180" font-family="sans-serif" font-size="15">
+  <title>長さ L の単純はり．左端から a の位置に荷重 P が掛かる</title>
+  <rect width="420" height="180" rx="6" fill="#ffffff"/>
+  <!-- はり -->
+  <rect x="40" y="70" width="340" height="14" fill="#dde4ec" stroke="#1f2328"/>
+  <!-- 左の支点（ピン）と右の支点（ローラー） -->
+  <polygon points="40,84 28,104 52,104" fill="#ffffff" stroke="#1f2328"/>
+  <polygon points="380,84 368,100 392,100" fill="#ffffff" stroke="#1f2328"/>
+  <line x1="366" y1="104" x2="394" y2="104" stroke="#1f2328"/>
+  <!-- 荷重 P（左端から 0.3 L） -->
+  <line x1="142" y1="22" x2="142" y2="60" stroke="#cf222e" stroke-width="2"/>
+  <polygon points="142,70 135,56 149,56" fill="#cf222e"/>
+  <text x="152" y="36" fill="#cf222e" font-style="italic">P</text>
+  <!-- 寸法 a -->
+  <line x1="40" y1="128" x2="142" y2="128" stroke="#59636e"/>
+  <line x1="40" y1="121" x2="40" y2="135" stroke="#59636e"/>
+  <line x1="142" y1="121" x2="142" y2="135" stroke="#59636e"/>
+  <text x="86" y="122" fill="#1f2328" font-style="italic">a</text>
+  <!-- 寸法 L -->
+  <line x1="40" y1="158" x2="380" y2="158" stroke="#59636e"/>
+  <line x1="40" y1="151" x2="40" y2="165" stroke="#59636e"/>
+  <line x1="380" y1="151" x2="380" y2="165" stroke="#59636e"/>
+  <text x="205" y="152" fill="#1f2328" font-style="italic">L</text>
+</svg>

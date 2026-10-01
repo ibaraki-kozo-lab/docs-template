@@ -1,0 +1,72 @@
+# PRを出したときと main にpushしたときに，手元と同じ make（サイトの組み立てと検査）を実行する．
+# 結果はPRの下部と Actions のタブに出る．
+#
+# 公開は，リポジトリの変数 DOCS_PUBLISH を作ったときだけ，main へのpushで行う．PRでは公開しない．
+# 設定のしかたは README.md の「公開する」にある．
+#   DOCS_PUBLISH が github-pages：GitHub Pages に公開する．インターネットの誰でも見られる
+#   DOCS_PUBLISH が cloudflare：Cloudflare Pages に公開し，Access で研究室の人だけに見せる（研究室の管理者が設定する）
+name: Docs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+# 同じPRに新しくpushしたら，前の実行は止める．main では止めずに順に待つので，公開が途中で切れない
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # DOCS_PUBLISH の値を書き間違えると，何も公開されないまま気付かないので，ここで止めて知らせる
+      - name: Check DOCS_PUBLISH
+        if: vars.DOCS_PUBLISH != '' && vars.DOCS_PUBLISH != 'github-pages' && vars.DOCS_PUBLISH != 'cloudflare'
+        env:
+          VALUE: ${{ vars.DOCS_PUBLISH }}
+        run: |
+          echo "::error::変数 DOCS_PUBLISH は github-pages か cloudflare にする（今は「$VALUE」）"
+          exit 1
+
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+      - name: Build and check
+        run: make check
+
+      # DOCS_PUBLISH が github-pages のとき：組み立てたサイト（site/）を，次の github-pages のジョブに渡す
+      - name: Upload the site for GitHub Pages
+        if: github.event_name == 'push' && vars.DOCS_PUBLISH == 'github-pages'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+      # DOCS_PUBLISH が cloudflare のとき：Cloudflare Pages に送る．
+      # プロジェクトの名前は，変数 CLOUDFLARE_PROJECT があればそれを，なければリポジトリの名前を使う
+      - name: Deploy to Cloudflare Pages
+        if: github.event_name == 'push' && vars.DOCS_PUBLISH == 'cloudflare'
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy site --project-name=${{ vars.CLOUDFLARE_PROJECT || github.event.repository.name }} --branch=main
+
+  # DOCS_PUBLISH が github-pages のときだけ動く：預けたサイトを GitHub Pages に公開する
+  github-pages:
+    if: github.event_name == 'push' && vars.DOCS_PUBLISH == 'github-pages'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

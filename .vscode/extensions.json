@@ -1,0 +1,7 @@
+{
+  // フォルダを開くと，VS Code が入れるか尋ねる拡張機能
+  "recommendations": [
+    // YAML：mkdocs.yml を書くときに，書ける項目の候補と誤りを示す
+    "redhat.vscode-yaml"
+  ]
+}

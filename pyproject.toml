@@ -1,0 +1,9 @@
+[project]
+# サイトを組み立てる道具を入れるためだけの設定．名前はどこにも使われない
+name = "my-docs"
+version = "0.1.0"
+requires-python = ">=3.12"
+# Material for MkDocs（サイトの見た目）と，その土台の MkDocs．uv add で足すと，ここと uv.lock に書かれる
+dependencies = [
+    "mkdocs-material>=9.7.7",
+]
